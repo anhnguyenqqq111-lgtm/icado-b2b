@@ -1,0 +1,20 @@
+{
+    "name": "rank-dashboard",
+    "version": "1.0.0",
+    "description": "Keyword Ranking Tracker — Check Google ranking + Google Sheets integration",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.6.1",
+        "express": "^4.21.0",
+        "ffmpeg-static": "^5.3.0",
+        "googleapis": "^144.0.0",
+        "puppeteer": "^23.0.0",
+        "puppeteer-extra": "^3.3.6",
+        "puppeteer-extra-plugin-stealth": "^2.11.2",
+        "sql.js": "^1.11.0"
+    }
+}

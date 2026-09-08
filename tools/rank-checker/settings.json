@@ -1,0 +1,25 @@
+{
+  "GOOGLE_SHEET_ID": "1QD4VA7CAMHzYPphRtxq2Kgkoi_RPJjgjYAV1CKwnmqA",
+  "UULE_CODE": "Tan Phu, Ho Chi Minh City, Vietnam",
+  "SHEET_HEADERS": [
+    "STT",
+    "Từ khóa",
+    "Vị trí",
+    "Từ khóa",
+    "Trang",
+    "Cập nhật",
+    "Liên kết",
+    "Local check",
+    "Giờ check"
+  ],
+  "HEADER_MAP": {
+    "STT": "idx",
+    "Từ khóa": "pos",
+    "Vị trí": "rank",
+    "Trang": "page",
+    "Cập nhật": "date",
+    "Liên kết": "url",
+    "Local check": "local",
+    "Giờ check": "time"
+  }
+}

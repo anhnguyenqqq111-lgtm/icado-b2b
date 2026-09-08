@@ -1,0 +1,17 @@
+schema_version = 1
+id = "Everest-Logistics/Everest-Logistics/thu-tuc-nhap-khau-day-cap-dien"
+client = "Everest-Logistics"
+brand = "Everest-Logistics"
+slug = "thu-tuc-nhap-khau-day-cap-dien"
+workflow = "standard"
+status = "review"
+updated_at = "2026-09-08"
+
+[artifacts]
+article = "article.md"
+audit_report = "audit-report.md"
+competitor_insights = "competitor-insights.md"
+fact_check_report = "fact-check-report.md"
+outline = "outline.md"
+research = "research.md"
+search_intent = "search-intent.md"

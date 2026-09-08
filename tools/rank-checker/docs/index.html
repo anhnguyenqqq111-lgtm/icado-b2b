@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rank Dashboard — Hướng dẫn cài đặt</title>
+    <meta name="description" content="Hướng dẫn cài đặt và sử dụng Rank Dashboard — Công cụ check ranking keyword Google tự động">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0f1a;
+            --bg-card: #111827;
+            --bg-code: #1e293b;
+            --border: #1e293b;
+            --accent: #22c55e;
+            --accent-dim: rgba(34,197,94,0.12);
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --text-muted: #64748b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.7; -webkit-font-smoothing: antialiased;
+        }
+        .hero {
+            text-align: center; padding: 80px 20px 60px;
+            background: linear-gradient(180deg, #0f172a 0%, var(--bg) 100%);
+            border-bottom: 1px solid var(--border);
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute;
+            top: -200px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--accent-dim); color: var(--accent);
+            padding: 6px 16px; border-radius: 100px;
+            font-size: 13px; font-weight: 600; margin-bottom: 24px;
+        }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { font-size: 18px; color: var(--text-dim); max-width: 600px; margin: 0 auto 32px; }
+        .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .hero-stat .num { font-size: 28px; font-weight: 700; color: var(--accent); }
+        .hero-stat .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10,15,26,0.9); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); padding: 0 20px;
+        }
+        .nav-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+        }
+        .nav-inner::-webkit-scrollbar { display: none; }
+        .nav a {
+            padding: 14px 16px; font-size: 13px; font-weight: 500;
+            color: var(--text-muted); text-decoration: none;
+            white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s;
+        }
+        .nav a:hover, .nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 20px 100px; }
+        .section { margin-bottom: 56px; scroll-margin-top: 60px; }
+        .section-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--accent-dim); color: var(--accent);
+            font-size: 14px; font-weight: 700; margin-right: 12px;
+        }
+        .section h2 {
+            font-size: 24px; font-weight: 700; margin-bottom: 20px;
+            display: flex; align-items: center;
+            padding-bottom: 12px; border-bottom: 1px solid var(--border);
+        }
+        .section h3 { font-size: 16px; font-weight: 600; margin: 24px 0 12px; }
+        .section p { color: var(--text-dim); margin-bottom: 16px; }
+        .section ul, .section ol { color: var(--text-dim); margin: 0 0 16px 24px; }
+        .section li { margin-bottom: 8px; }
+        .section li strong { color: var(--text); }
+        pre {
+            background: var(--bg-code); border: 1px solid var(--border);
+            border-radius: 10px; padding: 16px 20px;
+            overflow-x: auto; margin-bottom: 16px; font-size: 13.5px; line-height: 1.6;
+        }
+        code { font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; }
+        pre code { color: #a5f3fc; }
+        p code, li code, td code {
+            background: var(--bg-code); padding: 2px 7px;
+            border-radius: 5px; font-size: 12.5px; color: #fbbf24;
+        }
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 24px; margin-bottom: 16px;
+        }
+        .card-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .alert {
+            border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;
+            font-size: 14px; display: flex; gap: 12px; align-items: flex-start;
+        }
+        .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+        .alert-info { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); }
+        .alert-warning { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); }
+        .alert-success { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 14px; }
+        th, td { padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg-code); font-weight: 600; color: var(--text); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { color: var(--text-dim); }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+        .feature { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+        .feature-icon { font-size: 24px; margin-bottom: 8px; }
+        .feature-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .feature-desc { font-size: 13px; color: var(--text-muted); }
+        .steps { counter-reset: step; }
+        .step { position: relative; padding-left: 48px; margin-bottom: 20px; }
+        .step::before {
+            counter-increment: step; content: counter(step);
+            position: absolute; left: 0; top: 2px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--accent-dim); color: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 700;
+        }
+        .step-title { font-weight: 600; margin-bottom: 6px; color: var(--text); }
+        .step-desc { font-size: 14px; color: var(--text-dim); }
+        .footer {
+            text-align: center; padding: 40px 20px;
+            border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px;
+        }
+        .sheet-example { background: #fff; border-radius: 8px; overflow: hidden; margin-bottom: 16px; border: 1px solid var(--border); }
+        .sheet-example table { margin: 0; }
+        .sheet-example th { background: #e8f5e9; color: #1b5e20; font-size: 13px; text-transform: none; letter-spacing: 0; }
+        .sheet-example td { color: #333; background: #fff; font-size: 13px; }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 32px; }
+            .hero-stats { gap: 24px; }
+            .features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-badge">📊 Open Source Tool</div>
+    <h1>Rank <span>Dashboard</span></h1>
+    <p>Check ranking từ khóa Google tự động, tích hợp Google Sheets, CAPTCHA solver, WARP VPN</p>
+    <div class="hero-stats">
+        <div class="hero-stat"><div class="num">∞</div><div class="label">Keywords</div></div>
+        <div class="hero-stat"><div class="num">Auto</div><div class="label">CAPTCHA Solve</div></div>
+        <div class="hero-stat"><div class="num">Real-time</div><div class="label">Dashboard</div></div>
+    </div>
+</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="#download">Tải về</a>
+        <a href="#requirements">Yêu cầu</a>
+        <a href="#install">Cài đặt</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#sheet">Google Sheet</a>
+        <a href="#config">Cấu hình</a>
+        <a href="#run">Chạy & Xác thực</a>
+        <a href="#usage">Sử dụng</a>
+        <a href="#features">Tính năng</a>
+        <a href="#troubleshoot">Xử lý lỗi</a>
+    </div>
+</nav>
+
+<div class="content">
+
+    <!-- 1. Download -->
+    <div class="section" id="download">
+        <h2><span class="section-num">1</span> Tải về từ GitHub</h2>
+        <p>Chọn <strong>một trong ba</strong> cách:</p>
+
+        <h3>🅰️ Git Clone (khuyên dùng)</h3>
+        <pre><code>git clone https://github.com/darkwar859-arch/rank-dashboard.git
+cd rank-dashboard</code></pre>
+
+        <h3>🅱️ Tải ZIP</h3>
+        <ol>
+            <li>Mở <a href="https://github.com/darkwar859-arch/rank-dashboard" style="color:var(--accent)">github.com/darkwar859-arch/rank-dashboard</a></li>
+            <li>Nhấn nút <strong style="color:var(--accent)">⬇ Code</strong> (màu xanh) → <strong>Download ZIP</strong></li>
+            <li>Giải nén → mở thư mục <code>rank-dashboard-master</code></li>
+        </ol>
+
+        <h3>🅲 GitHub CLI</h3>
+        <pre><code>gh repo clone darkwar859-arch/rank-dashboard
+cd rank-dashboard</code></pre>
+    </div>
+
+    <!-- 2. Yêu cầu -->
+    <div class="section" id="requirements">
+        <h2><span class="section-num">2</span> Yêu cầu hệ thống</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🟢</div>
+                <div class="feature-title">Node.js v18+</div>
+                <div class="feature-desc">Tải tại <a href="https://nodejs.org" style="color:var(--accent)">nodejs.org</a> — chọn bản LTS</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">Google Chrome</div>
+                <div class="feature-desc">Khuyên dùng. Puppeteer sẽ tự tải Chromium nếu không có</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📄</div>
+                <div class="feature-title">File credentials.json</div>
+                <div class="feature-desc">Xin từ admin hoặc tự tạo (hướng dẫn bên dưới)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Cài đặt -->
+    <div class="section" id="install">
+        <h2><span class="section-num">3</span> Cài đặt Dependencies</h2>
+        <p>Mở Terminal / PowerShell tại thư mục <code>rank-dashboard</code>:</p>
+        <pre><code>npm install</code></pre>
+        <div class="alert alert-info">
+            <span class="alert-icon">💡</span>
+            <div>Lần đầu tải ~260 packages (Chromium + ffmpeg, ~200MB). Mất khoảng 2-5 phút.</div>
+        </div>
+    </div>
+
+    <!-- 4. Credentials -->
+    <div class="section" id="credentials">
+        <h2><span class="section-num">4</span> Lấy file credentials.json</h2>
+        <p>Bạn cần file <code>credentials.json</code> để kết nối Google Sheets. Có 2 cách:</p>
+
+        <div class="card">
+            <div class="card-title">🅰️ Cách nhanh: Xin từ admin</div>
+            <p style="color:var(--text-dim);margin:0">Nếu được share file <code>credentials.json</code>, chỉ cần đặt vào thư mục <code>rank-dashboard/</code> → xong.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🅱️ Tự tạo credentials riêng</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Tạo Google Cloud Project</div>
+                    <div class="step-desc">
+                        Truy cập <a href="https://console.cloud.google.com/" style="color:var(--accent)">Google Cloud Console</a> → tạo Project mới
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Bật APIs</div>
+                    <div class="step-desc">
+                        Menu → <strong>APIs & Services</strong> → <strong>Library</strong><br>
+                        Bật <code>Google Sheets API</code> + <code>Google Drive API</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Cấu hình OAuth Consent Screen</div>
+                    <div class="step-desc">
+                        <strong>APIs & Services</strong> → <strong>OAuth consent screen</strong><br>
+                        Chọn <strong>External</strong> → điền tên app → <strong>Publish App</strong> (để ai cũng dùng được)
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Tạo OAuth Client ID</div>
+                    <div class="step-desc">
+                        <strong>Credentials</strong> → <strong>Create Credentials</strong> → <strong>OAuth client ID</strong><br>
+                        Type: <strong>Desktop app</strong> → <strong>Create</strong>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Tải file JSON</div>
+                    <div class="step-desc">
+                        Nhấn ⬇️ tải JSON → đổi tên thành <code>credentials.json</code> → đặt vào <code>rank-dashboard/</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <span class="alert-icon">⚠️</span>
+            <div><strong>Bảo mật:</strong> Không upload <code>credentials.json</code> và <code>token.json</code> lên GitHub.</div>
+        </div>
+    </div>
+
+    <!-- 5. Google Sheet -->
+    <div class="section" id="sheet">
+        <h2><span class="section-num">5</span> Cấu trúc Google Sheet</h2>
+        <p>Google Sheet cần có <strong>2 tab</strong>:</p>
+
+        <h3>📋 Tab "Project"</h3>
+        <div class="sheet-example">
+            <table>
+                <tr><th>DỰ ÁN</th><th>Domain</th></tr>
+                <tr><td>WIN Flavor</td><td>winflavor.com</td></tr>
+                <tr><td>Telos Academy</td><td>telosacademy.edu.vn</td></tr>
+            </table>
+        </div>
+
+        <h3>📋 Tab "Keyword_KPI"</h3>
+        <div class="sheet-example">
+            <table>
+                <tr><th>DỰ ÁN</th><th>Keywords</th></tr>
+                <tr><td>WIN Flavor</td><td>quy định ghi nhãn thực phẩm</td></tr>
+                <tr><td>WIN Flavor</td><td>phụ gia thực phẩm cho phép</td></tr>
+                <tr><td>Telos Academy</td><td>trường quốc tế hồ chí minh</td></tr>
+            </table>
+        </div>
+
+        <div class="alert alert-info">
+            <span class="alert-icon">📝</span>
+            <div>Có thể thêm cột <strong>Topic</strong>, <strong>Sub Topic</strong> tùy ý. Tool chỉ cần 2 cột <code>DỰ ÁN</code> và <code>Keywords</code>.</div>
+        </div>
+
+        <h3>📊 Lấy Google Sheet ID</h3>
+        <p>Xem URL Google Sheet:</p>
+        <pre><code>https://docs.google.com/spreadsheets/d/<strong style="color:#22c55e">1ABC...XYZ</strong>/edit</code></pre>
+        <p>Phần <span style="color:var(--accent);font-weight:600">in đậm</span> là Sheet ID.</p>
+    </div>
+
+    <!-- 6. Cấu hình -->
+    <div class="section" id="config">
+        <h2><span class="section-num">6</span> Cấu hình settings.json</h2>
+        <p>Mở file <code>settings.json</code> và điền:</p>
+        <pre><code>{
+  "GOOGLE_SHEET_ID": "your-google-sheet-id-here",
+  "UULE_CODE": "Ho Chi Minh City, Vietnam"
+}</code></pre>
+
+        <table>
+            <tr><th>Key</th><th>Mô tả</th><th>Ví dụ</th></tr>
+            <tr><td><code>GOOGLE_SHEET_ID</code></td><td>ID Google Sheet</td><td><code>1QD4VA7...</code></td></tr>
+            <tr><td><code>UULE_CODE</code></td><td>Địa điểm check ranking</td><td><code>Tan Phu, Ho Chi Minh City, Vietnam</code></td></tr>
+        </table>
+    </div>
+
+    <!-- 7. Chạy & Xác thực -->
+    <div class="section" id="run">
+        <h2><span class="section-num">7</span> Chạy lần đầu & Xác thực Google</h2>
+
+        <pre><code>npm start</code></pre>
+        <p>Truy cập: <strong style="color:var(--accent)">http://localhost:3000</strong></p>
+
+        <div class="card">
+            <div class="card-title">🔐 Xác thực Google Sheets (chỉ cần 1 lần)</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-title">Mở Settings trên Dashboard</div>
+                    <div class="step-desc">Nhấn ⚙️ Settings → thấy "⚠ Chưa xác thực"</div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Click "Xác thực Google Sheets"</div>
+                    <div class="step-desc">Browser mở trang đăng nhập Google</div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Đăng nhập & cho phép quyền</div>
+                    <div class="step-desc">Chọn tài khoản Google → nhấn <strong>Allow</strong> / <strong>Cho phép</strong></div>
+                </div>
+                <div class="step">
+                    <div class="step-title">Tự động hoàn tất</div>
+                    <div class="step-desc">Google tự redirect về Dashboard → <strong>✅ Xác thực thành công!</strong><br>File <code>token.json</code> được tạo tự động. Các lần sau không cần xác thực lại.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-success">
+            <span class="alert-icon">✅</span>
+            <div>Sau khi xác thực, mở lại Settings sẽ thấy <strong>"✅ Đã xác thực"</strong>. Bạn có thể bắt đầu Sync và Check rank!</div>
+        </div>
+    </div>
+
+    <!-- 8. Sử dụng -->
+    <div class="section" id="usage">
+        <h2><span class="section-num">8</span> Hướng dẫn sử dụng</h2>
+
+        <h3>🎯 Check Ranking</h3>
+        <ol>
+            <li>Chọn <strong>Project</strong> từ dropdown</li>
+            <li>Nhấn <strong>Sync</strong> để tải keywords từ Google Sheet</li>
+            <li>Nhấn <strong>Check Rank</strong> — kết quả hiển thị real-time</li>
+        </ol>
+
+        <h3>⚙️ Tùy chọn</h3>
+        <table>
+            <tr><th>Tùy chọn</th><th>Mặc định</th><th>Mô tả</th></tr>
+            <tr><td><strong>MPS</strong></td><td>5</td><td>Số trang Google tối đa</td></tr>
+            <tr><td><strong>Chunk</strong></td><td>5</td><td>Số keyword check song song</td></tr>
+            <tr><td><strong>WARP</strong></td><td>OFF</td><td>Bật Cloudflare WARP VPN</td></tr>
+        </table>
+
+        <h3>🗑️ Quản lý dữ liệu</h3>
+        <table>
+            <tr><th>Nút</th><th>Chức năng</th></tr>
+            <tr><td><strong>Wipe</strong></td><td>Xóa kết quả check (10/20/30 gần nhất hoặc tất cả)</td></tr>
+            <tr><td><strong>🗑️ (cạnh Project)</strong></td><td>Xóa hoàn toàn project</td></tr>
+            <tr><td><strong>Export</strong></td><td>Tải kết quả CSV</td></tr>
+            <tr><td><strong>📄 Sheet</strong></td><td>Mở Google Sheet liên kết</td></tr>
+        </table>
+
+        <h3>📝 Writeback</h3>
+        <p>Kết quả <strong>tự động ghi vào Google Sheet</strong> — tạo tab mới theo tên project.</p>
+    </div>
+
+    <!-- 9. Tính năng -->
+    <div class="section" id="features">
+        <h2><span class="section-num">9</span> Tính năng</h2>
+        <div class="features">
+            <div class="feature"><div class="feature-icon">🤖</div><div class="feature-title">Auto CAPTCHA Solver</div><div class="feature-desc">Tự giải reCAPTCHA audio bằng Google Speech API</div></div>
+            <div class="feature"><div class="feature-icon">🔄</div><div class="feature-title">WARP VPN</div><div class="feature-desc">Tự reset WARP khi gặp 5 CAPTCHA liên tiếp</div></div>
+            <div class="feature"><div class="feature-icon">⏸️</div><div class="feature-title">Resume</div><div class="feature-desc">Bỏ qua keywords đã check trong 72h</div></div>
+            <div class="feature"><div class="feature-icon">📊</div><div class="feature-title">SERP Features</div><div class="feature-desc">Phát hiện Featured Snippet, PAA, Video...</div></div>
+            <div class="feature"><div class="feature-icon">🔔</div><div class="feature-title">Rank Drop Alerts</div><div class="feature-desc">Cảnh báo khi keyword tụt ≥5 vị trí</div></div>
+            <div class="feature"><div class="feature-icon">🧠</div><div class="feature-title">AI Insights</div><div class="feature-desc">Phân tích topic clusters bằng Gemini API</div></div>
+            <div class="feature"><div class="feature-icon">📅</div><div class="feature-title">Auto Schedule</div><div class="feature-desc">Check tự động: 6h / 12h / 24h / 3d / 1w</div></div>
+            <div class="feature"><div class="feature-icon">📄</div><div class="feature-title">Google Sheets Sync</div><div class="feature-desc">Đọc keywords + ghi kết quả theo project</div></div>
+        </div>
+    </div>
+
+    <!-- 10. Troubleshoot -->
+    <div class="section" id="troubleshoot">
+        <h2><span class="section-num">10</span> Xử lý lỗi</h2>
+        <table>
+            <tr><th>Lỗi</th><th>Giải pháp</th></tr>
+            <tr><td><code>Cannot find module</code></td><td>Chạy <code>npm install</code></td></tr>
+            <tr><td>CAPTCHA liên tục</td><td>Cài <a href="https://1.1.1.1/" style="color:var(--accent)">WARP 1.1.1.1</a> → bật WARP</td></tr>
+            <tr><td>Không đọc được Sheet</td><td>Kiểm tra <code>GOOGLE_SHEET_ID</code> trong settings.json</td></tr>
+            <tr><td>Token expired</td><td>Xóa <code>token.json</code> → chạy lại → xác thực lại</td></tr>
+            <tr><td>Port 3000 đã dùng</td><td><code>PORT=4000 npm start</code></td></tr>
+            <tr><td>Auth loop ("Chưa xác thực")</td><td>Xóa <code>token.json</code> → restart server → thử lại</td></tr>
+        </table>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>Rank Dashboard v1.2 — Built for SEO professionals</p>
+    <p style="margin-top:8px">Node.js + Puppeteer + Google Sheets API</p>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.nav a');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+});
+</script>
+
+</body>
+</html>

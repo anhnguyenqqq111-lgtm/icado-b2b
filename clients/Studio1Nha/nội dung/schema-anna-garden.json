@@ -1,0 +1,182 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://studio1nha.vn/lamour/#webpage",
+      "url": "https://studio1nha.vn/lamour/",
+      "name": "Phim Trường Anna Garden Quận 2 | Bảng Giá & Concept | Studio 1 nhà",
+      "description": "Chụp ảnh cưới lãng mạn như phim Hàn tại Phim trường Anna Garden Quận 2. Đặt lịch ngay hôm nay để nhận ưu đãi trọn gói cùng nhiều quà tặng hấp dẫn!",
+      "inLanguage": "vi-VN",
+      "datePublished": "2023-06-11",
+      "dateModified": "2023-06-11",
+      "isPartOf": {
+        "@id": "https://studio1nha.vn/#website"
+      },
+      "about": {
+        "@id": "https://studio1nha.vn/lamour/#service"
+      },
+      "mainEntity": {
+        "@id": "https://studio1nha.vn/lamour/#service"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://studio1nha.vn/lamour/#primaryimage"
+      },
+      "breadcrumb": {
+        "@id": "https://studio1nha.vn/lamour/#breadcrumb"
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://studio1nha.vn/lamour/"
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://studio1nha.vn/lamour/#service",
+      "url": "https://studio1nha.vn/lamour/",
+      "name": "Gói chụp ảnh cưới phim trường Anna Garden",
+      "alternateName": "Anna Garden 6tr9",
+      "description": "Gói chụp ảnh cưới phim trường Anna Garden do Studio 1 Nhà cung cấp, có tư vấn concept, trang phục, tạo dáng và thực hiện album cưới.",
+      "serviceType": "Chụp ảnh cưới phim trường",
+      "category": "Wedding photography",
+      "provider": {
+        "@id": "https://studio1nha.vn/#organization"
+      },
+      "image": {
+        "@id": "https://studio1nha.vn/lamour/#primaryimage"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Thành phố Hồ Chí Minh"
+      },
+      "availableChannel": [
+        {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://studio1nha.vn/lamour/",
+          "servicePhone": {
+            "@type": "ContactPoint",
+            "telephone": "+84967211002",
+            "contactType": "sales",
+            "areaServed": "VN",
+            "availableLanguage": "vi"
+          }
+        },
+        {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://zalo.me/0837887727"
+        }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "@id": "https://studio1nha.vn/lamour/#offer",
+        "url": "https://studio1nha.vn/lamour/",
+        "name": "Gói chụp ảnh cưới Anna Garden 6tr9",
+        "price": "6900000",
+        "priceCurrency": "VND",
+        "seller": {
+          "@id": "https://studio1nha.vn/#organization"
+        },
+        "itemOffered": {
+          "@id": "https://studio1nha.vn/lamour/#service"
+        }
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://studio1nha.vn/lamour/#primaryimage",
+      "url": "https://studio1nha.vn/application/upload/products/551.JPG",
+      "contentUrl": "https://studio1nha.vn/application/upload/products/551.JPG",
+      "width": 1600,
+      "height": 1067,
+      "caption": "Phim trường Anna Garden – bảng giá và concept chụp ảnh cưới",
+      "creditText": "Studio 1 Nhà",
+      "representativeOfPage": true
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://studio1nha.vn/lamour/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://studio1nha.vn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Phim trường",
+          "item": "https://studio1nha.vn/phim-truong/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Anna Garden",
+          "item": "https://studio1nha.vn/lamour/"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://studio1nha.vn/#website",
+      "url": "https://studio1nha.vn/",
+      "name": "Studio 1 Nhà",
+      "inLanguage": "vi-VN",
+      "publisher": {
+        "@id": "https://studio1nha.vn/#organization"
+      }
+    },
+    {
+      "@type": [
+        "LocalBusiness",
+        "ProfessionalService"
+      ],
+      "@id": "https://studio1nha.vn/#organization",
+      "name": "Studio 1 Nhà",
+      "url": "https://studio1nha.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://studio1nha.vn/#logo",
+        "url": "https://studio1nha.vn/application/upload/banner/logo-22.png",
+        "contentUrl": "https://studio1nha.vn/application/upload/banner/logo-22.png",
+        "caption": "Studio 1 Nhà"
+      },
+      "image": {
+        "@id": "https://studio1nha.vn/#logo"
+      },
+      "telephone": "+84967211002",
+      "email": "studio1nha@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "111 Hồ Văn Huê, Phường 9",
+        "addressLocality": "Phú Nhuận",
+        "addressRegion": "Thành phố Hồ Chí Minh",
+        "addressCountry": "VN"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+84967211002",
+          "contactType": "sales",
+          "areaServed": "VN",
+          "availableLanguage": "vi"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+84837887727",
+          "contactType": "customer service",
+          "areaServed": "VN",
+          "availableLanguage": "vi"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/studio1nha",
+        "https://www.instagram.com/studio1nha/",
+        "https://www.tiktok.com/@studio1nh",
+        "https://zalo.me/0837887727"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+node_modules/ 
+data/ 
+credentials.json 
+token.json 
+.env 
+*.db  

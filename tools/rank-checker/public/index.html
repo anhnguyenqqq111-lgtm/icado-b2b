@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rank Dashboard — Keyword Ranking Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <div class="logo-icon">📊</div>
+                <div>
+                    <h1>Rank Dashboard</h1>
+                    <span class="subtitle">Keyword Ranking Tracker</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="project-selector">
+                <label for="projectSelect">Project</label>
+                <select id="projectSelect">
+                    <option value="">— Select Project —</option>
+                </select>
+                <button class="btn btn-outline btn-sm" onclick="deleteCurrentProject()"
+                    title="Xóa project này">🗑️</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <button id="keywordsBtn" class="btn btn-outline" title="Quản lý từ khóa">
+                <span class="btn-icon">🔑</span> Keywords
+            </button>
+            <button id="openSheetBtn" class="btn btn-outline" title="Mở Google Sheet" onclick="openLinkedSheet()">
+                <span class="btn-icon">📄</span> Sheet
+            </button>
+            <button id="syncBtn" class="btn btn-primary" title="Sync from Google Sheet">
+                <span class="btn-icon">🔄</span> Sync
+            </button>
+            <button id="aiBtn" class="btn btn-outline" title="AI Analysis" onclick="triggerAiAnalysis()">
+                <span class="btn-icon">🧠</span> AI Insights
+            </button>
+            <button id="settingsBtn" class="btn btn-outline" title="Cài đặt" onclick="openSettingsModal()">
+                <span class="btn-icon">⚙️</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Welcome State -->
+        <div id="welcomeState" class="welcome-state">
+            <div class="welcome-icon">🎯</div>
+            <h2>Bắt đầu theo dõi ranking</h2>
+            <p>Tạo project mới hoặc chọn project có sẵn từ dropdown phía trên</p>
+
+            <div class="onboarding-card">
+                <h3>➕ Tạo Project mới</h3>
+                <div class="form-group">
+                    <label for="newProjectName">Tên project (khớp với tên sheet trong Google Sheet)</label>
+                    <input type="text" id="newProjectName" placeholder="VD: Heritage Vietnam Airlines" />
+                </div>
+                <div class="form-group">
+                    <label for="newProjectKeywords">Danh sách từ khóa <span class="label-hint">(mỗi dòng 1 từ khóa, thứ
+                            tự khớp với STT trong rankey)</span></label>
+                    <textarea id="newProjectKeywords" rows="8"
+                        placeholder="từ khóa 1&#10;từ khóa 2&#10;từ khóa 3&#10;..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button id="createProjectBtn" class="btn btn-primary" onclick="createProject()">
+                        🚀 Tạo Project & Sync
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content (hidden until project selected) -->
+        <div id="dashboardContent" class="dashboard-content hidden">
+
+            <!-- Native Checker Control Panel -->
+            <section class="checker-panel" id="checkerPanel">
+                <div class="checker-header">
+                    <h3>🔍 Rank Checker</h3>
+                    <div class="checker-controls">
+                        <div class="checker-options">
+                            <label class="checker-option">
+                                MPS: <input type="number" id="chkMaxPages" value="5" min="1" max="20" class="input-sm">
+                            </label>
+                            <label class="checker-option">
+                                Chunk: <input type="number" id="chkChunkSize" value="5" min="1" max="20"
+                                    class="input-sm">
+                            </label>
+                        </div>
+                        <div class="checker-domain">
+                            <label class="checker-option">
+                                Domain: <input type="text" id="chkDomain" placeholder="example.com"
+                                    class="input-domain">
+                            </label>
+                        </div>
+                        <div class="checker-actions">
+                            <button id="checkerStartBtn" class="btn btn-success" onclick="startNativeChecker()">
+                                ▶️ Check Rank
+                            </button>
+                            <button id="checkerPauseBtn" class="btn btn-outline" onclick="pauseNativeChecker()"
+                                disabled>
+                                ⏸ Pause
+                            </button>
+                            <button id="checkerStopBtn" class="btn btn-danger" onclick="stopNativeChecker()" disabled>
+                                ⏹ Stop
+                            </button>
+                            <div class="warp-control">
+                                <span id="warpIndicator" class="warp-dot offline" title="WARP Status"></span>
+                                <button id="warpToggleBtn" class="btn btn-outline btn-sm"
+                                    onclick="toggleWarp()">WARP</button>
+                            </div>
+                            <div class="wipe-control">
+                                <button class="btn btn-outline btn-sm" onclick="toggleWipeMenu()">🗑️ Wipe</button>
+                                <div id="wipeMenu" class="wipe-menu hidden">
+                                    <button onclick="wipeHistory(10)">10 kết quả gần nhất</button>
+                                    <button onclick="wipeHistory(20)">20 kết quả gần nhất</button>
+                                    <button onclick="wipeHistory(30)">30 kết quả gần nhất</button>
+                                    <hr>
+                                    <button onclick="wipeHistory(0)" class="danger">Tất cả kết quả</button>
+                                    <button onclick="deleteProjectKeywords()" class="danger">⚠️ Xóa keywords + dữ
+                                        liệu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Progress Bar -->
+                <div class="checker-progress" id="checkerProgress" style="display:none">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="checkerProgressFill"></div>
+                    </div>
+                    <span class="progress-text" id="checkerProgressText">0%</span>
+                </div>
+                <!-- Schedule Controls -->
+                <div class="schedule-controls">
+                    <label class="checker-option">
+                        ⏰ Lịch check:
+                        <select id="scheduleInterval" class="input-sm">
+                            <option value="">Tắt</option>
+                            <option value="6">Mỗi 6 giờ</option>
+                            <option value="12">Mỗi 12 giờ</option>
+                            <option value="24">Mỗi ngày</option>
+                            <option value="72">Mỗi 3 ngày</option>
+                            <option value="168">Mỗi tuần</option>
+                        </select>
+                    </label>
+                    <button id="scheduleBtn" class="btn btn-outline btn-sm" onclick="toggleSchedule()">📅 Đặt
+                        lịch</button>
+                    <span id="scheduleStatus" class="schedule-status"></span>
+                </div>
+            </section>
+
+            <!-- Stats Cards -->
+            <section class="stats-grid">
+                <div class="stat-card stat-total">
+                    <div class="stat-icon">🔑</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTotal">0</span>
+                        <span class="stat-label">Tổng từ khóa</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-top3">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTop3">0</span>
+                        <span class="stat-label">Top 3</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-top10">
+                    <div class="stat-icon">🥇</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTop10">0</span>
+                        <span class="stat-label">Top 4-10</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-top30">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTop30">0</span>
+                        <span class="stat-label">Top 11-30</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-notfound">
+                    <div class="stat-icon">❌</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statNotFound">0</span>
+                        <span class="stat-label">Không tìm thấy</span>
+                    </div>
+                </div>
+                <div class="stat-card stat-avg">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statAvg">—</span>
+                        <span class="stat-label">Vị trí TB</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Row -->
+            <section class="charts-row">
+                <div class="chart-card">
+                    <h3>Phân bổ thứ hạng</h3>
+                    <div class="chart-container">
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3 id="historyChartTitle">Lịch sử thứ hạng</h3>
+                    <div class="chart-container">
+                        <canvas id="historyChart"></canvas>
+                    </div>
+                    <p class="chart-hint" id="historyHint">Click vào keyword trong bảng để xem lịch sử</p>
+                </div>
+            </section>
+
+            <!-- Audit Suggestions Panel -->
+            <section id="auditPanel" class="audit-panel">
+                <div class="audit-header">
+                    <h3>🔍 Đề cử Audit</h3>
+                    <span id="auditSummary" class="audit-summary"></span>
+                </div>
+                <div class="audit-grid">
+                    <div class="audit-card audit-critical">
+                        <div class="audit-card-header">
+                            <span class="audit-badge critical">🔴 Cần viết mới</span>
+                            <span class="audit-count" id="auditCriticalCount">0</span>
+                        </div>
+                        <p class="audit-desc">Keywords không tìm thấy — chưa có content hoặc chưa index</p>
+                        <div class="audit-list" id="auditCriticalList"></div>
+                    </div>
+                    <div class="audit-card audit-warning">
+                        <div class="audit-card-header">
+                            <span class="audit-badge warning">🟡 Cần tối ưu</span>
+                            <span class="audit-count" id="auditWarningCount">0</span>
+                        </div>
+                        <p class="audit-desc">Keywords ranking 11-50 — content có nhưng chưa tốt</p>
+                        <div class="audit-list" id="auditWarningList"></div>
+                    </div>
+                    <div class="audit-card audit-down">
+                        <div class="audit-card-header">
+                            <span class="audit-badge down">⬇️ Đang tụt hạng</span>
+                            <span class="audit-count" id="auditDownCount">0</span>
+                        </div>
+                        <p class="audit-desc">Keywords có trend giảm — cần audit lại content</p>
+                        <div class="audit-list" id="auditDownList"></div>
+                    </div>
+                    <div class="audit-card audit-ok">
+                        <div class="audit-card-header">
+                            <span class="audit-badge ok">🟢 Đang tốt</span>
+                            <span class="audit-count" id="auditOkCount">0</span>
+                        </div>
+                        <p class="audit-desc">Keywords Top 10 — chỉ cần theo dõi</p>
+                        <div class="audit-list" id="auditOkList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Insights Panel -->
+            <section id="aiInsightsPanel" class="ai-insights-panel hidden">
+                <div class="ai-header">
+                    <div>
+                        <h3>🧠 AI Insights <span id="aiStatus" class="ai-status"></span></h3>
+                        <span id="aiAnalyzedAt" class="ai-meta"></span>
+                    </div>
+                    <div class="ai-progress" id="aiProgress" style="display:none">
+                        <div class="ai-progress-bar">
+                            <div class="ai-progress-fill" id="aiProgressFill"></div>
+                        </div>
+                        <span id="aiProgressText" class="ai-progress-text">Đang phân tích...</span>
+                    </div>
+                </div>
+                <div id="aiTopics" class="ai-topics"></div>
+                <div id="aiSuggestions" class="ai-suggestions"></div>
+            </section>
+
+            <!-- View Mode Toggle + Filter Tabs + Search -->
+            <section class="table-controls">
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="table" onclick="switchView('table')">📋 Bảng</button>
+                    <button class="view-btn" data-view="urlgroup" onclick="switchView('urlgroup')">🔗 Nhóm URL</button>
+                </div>
+                <div class="filter-tabs" id="filterTabs">
+                    <button class="filter-tab active" data-filter="all">Tất cả</button>
+                    <button class="filter-tab" data-filter="top3">Top 3</button>
+                    <button class="filter-tab" data-filter="top10">Top 10</button>
+                    <button class="filter-tab" data-filter="top30">Top 30</button>
+                    <button class="filter-tab" data-filter="notfound">Không tìm thấy</button>
+                    <button class="filter-tab" data-filter="dropping">📉 Đang tụt</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Tìm từ khóa..." />
+                </div>
+                <button id="exportBtn" class="btn btn-outline" title="Export CSV">
+                    📥 Export
+                </button>
+            </section>
+
+            <!-- Rankings Table -->
+            <section class="table-section">
+                <div class="table-wrapper">
+                    <table id="rankingsTable">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="stt">#</th>
+                                <th class="sortable" data-sort="keyword">Từ khóa</th>
+                                <th class="sortable" data-sort="position">Vị trí</th>
+                                <th class="sortable" data-sort="page">Trang</th>
+                                <th>URL</th>
+                                <th>Local</th>
+                                <th class="sortable" data-sort="checked_at">Cập nhật</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingsBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noData" class="no-data hidden">
+                    <p>Chưa có dữ liệu. Bấm <strong>Sync</strong> để tải từ Google Sheet hoặc <strong>Check
+                            Rank</strong> để check trực tiếp.</p>
+                </div>
+
+                <!-- URL Group View (hidden by default) -->
+                <div id="urlGroupView" class="url-group-view hidden"></div>
+            </section>
+
+            <!-- Sync Info -->
+            <section class="sync-info">
+                <span id="syncStatus">Chưa sync</span>
+                <span id="lastSyncTime"></span>
+            </section>
+        </div>
+    </main>
+
+    <!-- Keyword Management Modal -->
+    <div id="keywordModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeKeywordModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔑 Quản lý từ khóa</h2>
+                <button class="modal-close" onclick="closeKeywordModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-hint">Nhập danh sách từ khóa, mỗi dòng 1 từ khóa. Thứ tự phải khớp với STT trong Google
+                    Sheet và rankey.</p>
+                <textarea id="keywordInput" rows="15"
+                    placeholder="từ khóa 1&#10;từ khóa 2&#10;từ khóa 3&#10;..."></textarea>
+                <div class="modal-footer">
+                    <span id="keywordCount">0 từ khóa đã lưu</span>
+                    <button id="saveKeywordsBtn" class="btn btn-primary" onclick="saveKeywords()">💾 Lưu từ
+                        khóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeSettingsModal()"></div>
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h2>⚙️ Cài đặt</h2>
+                <button class="modal-close" onclick="closeSettingsModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Google Sheet ID</label>
+                    <input type="text" id="settingSheetId" placeholder="1VqZ83...">
+                </div>
+                <div class="form-group">
+                    <label>UULE Location</label>
+                    <input type="text" id="settingUule" placeholder="Tan Phu, Ho Chi Minh City, Vietnam">
+                </div>
+                <div class="form-group">
+                    <label>Google Sheets OAuth</label>
+                    <div id="oauthStatus" class="oauth-status">Đang kiểm tra...</div>
+                </div>
+                <div class="form-group">
+                    <label>🧠 Ollama AI</label>
+                    <div id="ollamaStatus" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                        <span id="ollamaStatusText" style="font-size:13px;color:var(--text-dim)">Đang kiểm tra...</span>
+                        <button id="ollamaToggleBtn" class="btn" onclick="toggleOllama()"
+                            style="font-size:12px;padding:4px 12px;display:none">⏳</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="saveSettingsModal()">💾 Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=2"></script>
+</body>
+
+</html>

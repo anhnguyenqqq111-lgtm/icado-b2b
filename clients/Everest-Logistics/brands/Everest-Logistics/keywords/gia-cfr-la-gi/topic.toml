@@ -1,0 +1,12 @@
+schema_version = 1
+id = "Everest-Logistics/Everest-Logistics/gia-cfr-la-gi"
+client = "Everest-Logistics"
+brand = "Everest-Logistics"
+slug = "gia-cfr-la-gi"
+workflow = "standard"
+status = "backlog"
+updated_at = "2026-09-08"
+
+[artifacts]
+article = "article.md"
+outline = "outline.md"

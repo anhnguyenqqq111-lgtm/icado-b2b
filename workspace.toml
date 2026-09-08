@@ -1,0 +1,40 @@
+schema_version = 1
+
+[paths]
+clients = "clients"
+references = "data/reference"
+projects = "projects"
+tools = "tools"
+archive_index = "archive/index.toml"
+
+[topic]
+canonical_files = [
+  "search-intent.md",
+  "research.md",
+  "competitor-insights.md",
+  "outline.md",
+  "fact-check-report.md",
+  "article.md",
+  "audit-report.md",
+]
+
+[workflows.standard]
+required = ["search-intent.md", "research.md", "competitor-insights.md", "outline.md", "article.md", "audit-report.md"]
+
+[workflows.finance]
+required = ["search-intent.md", "research.md", "competitor-insights.md", "outline.md", "fact-check-report.md", "article.md", "audit-report.md"]
+
+[workflows.travel]
+required = ["search-intent.md", "research.md", "competitor-insights.md", "outline.md", "fact-check-report.md", "article.md", "audit-report.md"]
+
+[workflows.regulated]
+required = ["search-intent.md", "research.md", "competitor-insights.md", "outline.md", "fact-check-report.md", "article.md", "audit-report.md"]
+
+[migration.brand_map]
+"Everest-Logistics/keywords" = "Everest-Logistics"
+"ICADO/keywords" = "ICADO"
+"MayMacCTH/keywords" = "MayMacCTH"
+"Studio1Nha/keywords" = "Studio1Nha"
+
+[graph]
+excluded_segments = ["node_modules", ".next", "build", "dist", "venv", "__pycache__", "archive", ".app"]

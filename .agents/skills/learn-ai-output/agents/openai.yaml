@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn AI Output"
+  short_description: "Biến sản phẩm AI thành tài liệu tự học"
+  default_prompt: "Use $learn-ai-output to turn the AI-created work into a Vietnamese learning document I can study and reproduce."

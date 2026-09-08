@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="MayMacCTH cung cấp đồng phục cho doanh nghiệp, trường học và đơn vị dịch vụ tại Hải Phòng."
+    />
+    <title>Giới thiệu MayMacCTH - May đồng phục tại Hải Phòng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Baloo+2:wght@600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #202020;
+        --muted: #66636b;
+        --purple: #2457b4;
+        --deep-purple: #143a83;
+        --lavender: #f4f8ff;
+        --line: #dbe6f8;
+        --yellow: #ffd51c;
+        --white: #ffffff;
+        --shadow: 0 16px 40px rgba(23, 67, 143, 0.15);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--white);
+        font-family: Archivo, Arial, sans-serif;
+        line-height: 1.65;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .container {
+        width: min(1160px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .utility-bar {
+        border-bottom: 1px solid #e3ebf8;
+        background: #fff;
+        color: #737078;
+        font-size: 13px;
+      }
+
+      .utility-bar .container {
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand-header {
+        background: #fff;
+        padding: 16px 0;
+      }
+
+      .brand-header .container {
+        display: grid;
+        grid-template-columns: 190px 1fr auto;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .logo img {
+        display: block;
+        max-width: 160px;
+        height: 58px;
+        object-fit: contain;
+        object-position: left center;
+      }
+
+      .search-label {
+        border: 1px solid #ded9df;
+        border-radius: 8px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        color: #a19da3;
+        font-size: 14px;
+      }
+
+      .search-label span {
+        color: var(--ink);
+        font-weight: 700;
+        padding-right: 15px;
+        margin-right: 15px;
+        border-right: 1px solid #ded9df;
+      }
+
+      .phone-chip {
+        white-space: nowrap;
+        border: 1px solid var(--purple);
+        color: var(--purple);
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 18px;
+        border-radius: 6px;
+      }
+
+      .nav-wrap { background: var(--purple); }
+
+      .main-nav {
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+        gap: 0;
+      }
+
+      .nav-all {
+        color: var(--yellow);
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+        padding: 16px 28px 16px 0;
+        margin-right: 22px;
+        border-right: 1px solid rgba(255, 255, 255, 0.26);
+      }
+
+      .nav-list {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 4px;
+        list-style: none;
+      }
+
+      .nav-list a {
+        color: #fff;
+        padding: 16px 15px;
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .nav-list a[aria-current="page"],
+      .nav-list a:hover { background: rgba(255, 255, 255, 0.16); }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        min-height: 390px;
+        display: grid;
+        align-items: end;
+        overflow: hidden;
+        background: #152e5d;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background:
+          linear-gradient(90deg, rgba(9, 35, 81, 0.92) 0%, rgba(18, 65, 142, 0.72) 50%, rgba(9, 35, 81, 0.25) 100%),
+          url("https://maymaccth.com/storage/hf-20260305-084722-7d45ed21-f667-4879-8ab8-06f0d00d1b00.jpeg") center 34% / cover no-repeat;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        width: 48vw;
+        height: 48vw;
+        right: -16vw;
+        bottom: -33vw;
+        background: rgba(255, 213, 28, 0.22);
+        border-radius: 50%;
+      }
+
+      .hero-content { padding: 76px 0 68px; }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: #ffe57a;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      h1, h2, h3 { font-family: "Baloo 2", Archivo, sans-serif; line-height: 1.15; }
+
+      h1 {
+        max-width: 690px;
+        margin: 0;
+        color: #fff;
+        font-size: clamp(38px, 5vw, 64px);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+        margin: 17px 0 0;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 17px;
+      }
+
+      .breadcrumb {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+        color: #77727a;
+        font-size: 13px;
+      }
+
+      .breadcrumb a { color: var(--purple); }
+
+      .trust-band {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid var(--line);
+        border-top: 0;
+        background: #fff;
+      }
+
+      .trust-item {
+        min-height: 118px;
+        padding: 25px 30px;
+        border-right: 1px solid var(--line);
+      }
+
+      .trust-item:last-child { border-right: 0; }
+      .trust-item strong { display: block; margin-bottom: 5px; color: var(--purple); font-size: 16px; }
+      .trust-item span { display: block; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+      .intro {
+        display: grid;
+        grid-template-columns: 0.94fr 1.06fr;
+        gap: 70px;
+        padding: 86px 0 70px;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        color: var(--purple);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 0 0 21px;
+        color: #29242b;
+        font-size: clamp(29px, 3.2vw, 42px);
+        font-weight: 800;
+        letter-spacing: -0.018em;
+      }
+
+      .lead {
+        margin: 0;
+        font-size: 18px;
+        color: #3b363d;
+      }
+
+      .intro-copy p { margin: 0 0 17px; color: var(--muted); }
+
+      .category-panel {
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+
+      .category-panel h3 {
+        margin: 0 0 19px;
+        color: var(--purple);
+        font-size: 23px;
+      }
+
+      .category-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+
+      .category-list li {
+        display: flex;
+        align-items: start;
+        gap: 11px;
+        color: #49444b;
+        font-size: 15px;
+      }
+
+      .category-list li::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        margin-top: 8px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: var(--purple);
+      }
+
+      .category-showcase { padding: 16px 0 88px; }
+
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .category-card {
+        position: relative;
+        min-height: 218px;
+        overflow: hidden;
+        padding: 27px 22px 23px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        border-radius: 14px;
+        color: #fff;
+        background: #143a83;
+      }
+
+      .category-card::before {
+        content: "";
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        top: -72px;
+        right: -68px;
+        border: 25px solid rgba(255, 255, 255, 0.13);
+        border-radius: 50%;
+      }
+
+      .category-card:nth-child(1) {
+        background: linear-gradient(0deg, rgba(9, 35, 81, 0.91), rgba(9, 35, 81, 0.18)), url("https://maymaccth.com/storage/hf-20260305-084722-7d45ed21-f667-4879-8ab8-06f0d00d1b00.jpeg") center 30% / cover;
+      }
+      .category-card:nth-child(2) {
+        background: linear-gradient(0deg, rgba(17, 57, 124, 0.93), rgba(17, 57, 124, 0.12)), url("https://maymaccth.com/storage/344370025-778670443586829-1406004084395875084-n.jpg") center / cover;
+      }
+      .category-card:nth-child(3) {
+        background: linear-gradient(0deg, rgba(17, 57, 124, 0.92), rgba(17, 57, 124, 0.18)), url("https://maymaccth.com/storage/banner/banner-1763458713-7287.png") center / cover;
+      }
+      .category-card:nth-child(4) {
+        background: linear-gradient(0deg, rgba(9, 35, 81, 0.93), rgba(9, 35, 81, 0.14)), url("https://maymaccth.com/storage/c674a6ee3c558d0bd44414.jpg") center / cover;
+      }
+      .category-card > * { position: relative; }
+      .category-card span { color: rgba(255, 255, 255, 0.7); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+      .category-card h3 { margin: 8px 0 10px; font-size: 24px; }
+      .category-card em { color: #fff; font-size: 14px; font-style: normal; font-weight: 700; }
+
+      .process { padding: 76px 0; background: var(--lavender); }
+
+      .section-heading { max-width: 710px; margin-bottom: 38px; }
+
+      .section-heading p { margin: 0; color: var(--muted); }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .step {
+        position: relative;
+        min-height: 212px;
+        padding: 30px 28px 27px;
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #dce8fa;
+      }
+
+      .step-number {
+        display: block;
+        margin-bottom: 17px;
+        color: var(--purple);
+        font-family: "Baloo 2", sans-serif;
+        font-size: 29px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .step h3 { margin: 0 0 9px; font-size: 21px; }
+      .step p { margin: 0; color: var(--muted); font-size: 15px; }
+
+      .quote-prep { padding: 84px 0; }
+
+      .quote-prep-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 72px;
+        align-items: start;
+      }
+
+      .quote-prep-grid > p { margin: 0; color: var(--muted); }
+
+      .checklist {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .checklist li {
+        min-height: 96px;
+        padding: 20px;
+        border-radius: 11px;
+        background: #f1f6ff;
+        color: #4b454c;
+        font-size: 14px;
+      }
+
+      .checklist strong { display: block; margin-bottom: 4px; color: var(--ink); }
+
+      .local {
+        display: grid;
+        grid-template-columns: 1fr 0.96fr;
+        gap: 72px;
+        align-items: center;
+        padding: 88px 0;
+      }
+
+      .local-copy p { max-width: 610px; color: var(--muted); }
+
+      .address-card {
+        padding: 36px;
+        border-radius: 16px;
+        background: var(--purple);
+        color: #fff;
+        box-shadow: 0 16px 35px rgba(23, 67, 143, 0.24);
+      }
+
+      .address-card h3 { margin: 0 0 14px; font-size: 26px; }
+      .address-card p { margin: 0 0 22px; color: rgba(255, 255, 255, 0.9); }
+      .address-card small { color: rgba(255, 255, 255, 0.7); }
+
+      .faq { padding: 0 0 88px; }
+
+      .faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+      .faq-item {
+        padding: 25px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .faq-item h3 { margin: 0 0 10px; color: var(--purple); font-size: 20px; }
+      .faq-item p { margin: 0; color: var(--muted); font-size: 14px; }
+
+      .product-gallery { padding: 0 0 88px; }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr 0.9fr;
+        gap: 16px;
+      }
+
+      .gallery-card {
+        min-height: 300px;
+        overflow: hidden;
+        position: relative;
+        margin: 0;
+        border-radius: 14px;
+        background: #e9f1fd;
+      }
+
+      .gallery-card img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 240ms ease; }
+      .gallery-card:first-child img { object-position: center 25%; }
+      .gallery-card:nth-child(2) img { object-position: center; }
+      .gallery-card:nth-child(3) img { object-position: center; }
+      .gallery-card:hover img { transform: scale(1.035); }
+
+      .gallery-card figcaption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 30px 20px 17px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        background: linear-gradient(transparent, rgba(7, 31, 72, 0.86));
+      }
+
+      .cta {
+        padding: 72px 0;
+        background: #0b2c64;
+        color: #fff;
+        text-align: center;
+      }
+
+      .cta h2 { margin-bottom: 14px; color: #fff; }
+      .cta p { max-width: 690px; margin: 0 auto 26px; color: rgba(255, 255, 255, 0.78); }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 24px;
+        border-radius: 6px;
+        background: #fff;
+        color: var(--purple);
+        font-size: 14px;
+        font-weight: 700;
+        transition: transform 160ms ease, background 160ms ease;
+      }
+
+      .button:hover { transform: translateY(-2px); background: #fff8cc; }
+
+      footer { padding: 38px 0; background: #1f1d20; color: #d0cbd1; font-size: 14px; }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .footer-content strong { color: #fff; }
+
+      @media (max-width: 820px) {
+        .brand-header .container { grid-template-columns: 1fr auto; gap: 15px; }
+        .search-label { display: none; }
+        .nav-all { display: none; }
+        .nav-list { width: 100%; justify-content: space-between; overflow-x: auto; }
+        .nav-list a { padding: 15px 11px; white-space: nowrap; }
+        .intro, .local, .quote-prep-grid { grid-template-columns: 1fr; gap: 36px; }
+        .intro { padding: 64px 0; }
+        .steps, .faq-grid, .gallery-grid { grid-template-columns: 1fr; }
+        .category-grid { grid-template-columns: repeat(2, 1fr); }
+        .trust-band { grid-template-columns: 1fr; }
+        .trust-item { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+        .trust-item:last-child { border-bottom: 0; }
+        .process, .local { padding: 62px 0; }
+      }
+
+      @media (max-width: 520px) {
+        .container { width: min(100% - 28px, 1160px); }
+        .utility-bar .container { justify-content: center; }
+        .utility-bar .container span:last-child { display: none; }
+        .brand-header { padding: 11px 0; }
+        .brand-header .container { grid-template-columns: 1fr; }
+        .logo img { height: 46px; }
+        .phone-chip { display: none; }
+        .hero { min-height: 375px; }
+        .hero-content { padding: 64px 0 54px; }
+        .hero-copy { font-size: 16px; }
+        .category-panel, .address-card { padding: 26px 22px; }
+        .category-grid, .checklist { grid-template-columns: 1fr; }
+        .category-showcase, .quote-prep, .faq { padding-bottom: 62px; }
+        .footer-content { flex-direction: column; align-items: start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="utility-bar">
+      <div class="container">
+        <span>May đồng phục theo yêu cầu tại Hải Phòng</span>
+        <span>Địa chỉ: 73/202 Miếu Hai Xã, Lê Chân, Hải Phòng</span>
+      </div>
+    </div>
+
+    <header class="brand-header">
+      <div class="container">
+        <a class="logo" href="https://maymaccth.com/" aria-label="Trang chủ MayMacCTH">
+          <img src="https://maymaccth.com/storage/logo-1.png" alt="MayMacCTH" />
+        </a>
+        <div class="search-label" aria-hidden="true"><span>Tất cả</span>Tìm kiếm sản phẩm...</div>
+        <a class="phone-chip" href="https://maymaccth.com/contact-us">Liên hệ tư vấn</a>
+      </div>
+    </header>
+
+    <div class="nav-wrap">
+      <nav class="container main-nav" aria-label="Điều hướng chính">
+        <span class="nav-all">TẤT CẢ DANH MỤC</span>
+        <ul class="nav-list">
+          <li><a href="https://maymaccth.com/">Trang chủ</a></li>
+          <li><a href="#gioi-thieu" aria-current="page">Về chúng tôi</a></li>
+          <li><a href="https://maymaccth.com/products">Sản phẩm</a></li>
+          <li><a href="https://maymaccth.com/guide">Hướng dẫn</a></li>
+          <li><a href="https://maymaccth.com/contact-us">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <main id="gioi-thieu">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="container hero-content">
+          <p class="eyebrow">Về MayMacCTH</p>
+          <h1 id="page-title">May đồng phục theo nhu cầu tại Hải Phòng</h1>
+          <p class="hero-copy">
+            MayMacCTH cung cấp đồng phục cho doanh nghiệp, trường học, đơn vị dịch vụ và nhóm tập thể. Mỗi đơn hàng được tư vấn theo mục đích sử dụng, kiểu dáng và yêu cầu nhận diện riêng.
+          </p>
+        </div>
+      </section>
+
+      <div class="breadcrumb">
+        <div class="container"><a href="https://maymaccth.com/">Trang chủ</a> / Về chúng tôi</div>
+      </div>
+
+      <section class="container trust-band" aria-label="Thông tin chính về MayMacCTH">
+        <div class="trust-item">
+          <strong>Tại Hải Phòng</strong>
+          <span>Địa chỉ rõ ràng tại quận Lê Chân, thuận tiện để trao đổi nhu cầu đặt may.</span>
+        </div>
+        <div class="trust-item">
+          <strong>Danh mục đa dạng</strong>
+          <span>Phục vụ đồng phục công ty, trường học, dịch vụ, y tế, sự kiện và thể thao.</span>
+        </div>
+        <div class="trust-item">
+          <strong>Trao đổi theo đơn</strong>
+          <span>Chất liệu, kiểu dáng, logo, số lượng và giao nhận được thống nhất theo yêu cầu thực tế.</span>
+        </div>
+      </section>
+
+      <section class="container intro" aria-labelledby="about-heading">
+        <div>
+          <p class="section-kicker">MayMacCTH</p>
+          <h2 id="about-heading">Đồng phục phù hợp với nhu cầu sử dụng thực tế</h2>
+          <p class="lead">
+            Đồng phục cần đồng bộ về hình ảnh, phù hợp với môi trường sử dụng và thuận tiện cho người mặc. Đây là những yếu tố MayMacCTH cùng khách hàng làm rõ trước khi triển khai đơn hàng.
+          </p>
+        </div>
+        <div class="intro-copy">
+          <p>
+            MayMacCTH phục vụ nhu cầu may đồng phục tại Lê Chân, Hải An, KCN VSIP Hải Phòng, KCN Tràng Duệ và các khu vực lân cận. Chúng tôi tiếp nhận yêu cầu về chất liệu, màu sắc, logo, kiểu dáng và kích cỡ để tư vấn phương án phù hợp.
+          </p>
+          <p>
+            Khách hàng có thể trao đổi từ đơn hàng cho doanh nghiệp, trường học, ngành dịch vụ đến nhóm tập thể. Thông tin rõ ràng từ đầu giúp việc thống nhất yêu cầu đặt may thuận tiện hơn.
+          </p>
+        </div>
+      </section>
+
+      <section class="container category-showcase" aria-labelledby="category-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Danh mục phục vụ</p>
+          <h2 id="category-heading">Chọn nhóm đồng phục theo nhu cầu của đơn vị</h2>
+          <p>Khách hàng có thể tham khảo các danh mục hiện có trước khi liên hệ để trao đổi chi tiết về sản phẩm cần đặt.</p>
+        </div>
+        <div class="category-grid">
+          <a class="category-card" href="https://maymaccth.com/product-categories/ao-polo-dong-phuc-cong-ty-1">
+            <span>Doanh nghiệp</span>
+            <h3>Đồng phục công ty</h3>
+            <em>Xem danh mục →</em>
+          </a>
+          <a class="category-card" href="https://maymaccth.com/product-categories/dong-phuc-nganh-dich-vu">
+            <span>Dịch vụ</span>
+            <h3>Nhà hàng và đơn vị dịch vụ</h3>
+            <em>Xem danh mục →</em>
+          </a>
+          <a class="category-card" href="https://maymaccth.com/product-categories/dong-phuc-hoc-sinh-ao-lop">
+            <span>Trường học</span>
+            <h3>Áo lớp và đồng phục học sinh</h3>
+            <em>Xem danh mục →</em>
+          </a>
+          <a class="category-card" href="https://maymaccth.com/product-categories/quan-ao-the-thao-clb">
+            <span>Đội nhóm</span>
+            <h3>Thể thao và câu lạc bộ</h3>
+            <em>Xem danh mục →</em>
+          </a>
+        </div>
+      </section>
+
+      <section class="process" aria-labelledby="process-heading">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">Tư vấn đặt may</p>
+            <h2 id="process-heading">Bắt đầu từ thông tin cần thiết của từng đơn hàng</h2>
+            <p>Thông tin được trao đổi trước giúp khách hàng chọn phương án đặt may phù hợp với người sử dụng và ngân sách dự kiến.</p>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <span class="step-number">01</span>
+              <h3>Xác định nhu cầu</h3>
+              <p>Trao đổi về nhóm người mặc, loại đồng phục, số lượng dự kiến và mục đích sử dụng.</p>
+            </article>
+            <article class="step">
+              <span class="step-number">02</span>
+              <h3>Thống nhất yêu cầu</h3>
+              <p>Làm rõ chất liệu, màu sắc, logo, kiểu dáng, kích cỡ và các yêu cầu cần lưu ý.</p>
+            </article>
+            <article class="step">
+              <span class="step-number">03</span>
+              <h3>Xác nhận từng đơn</h3>
+              <p>Báo giá, thời gian thực hiện và phương thức giao nhận cần được xác nhận theo thông tin thực tế.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="container quote-prep" aria-labelledby="prep-heading">
+        <div class="quote-prep-grid">
+          <div>
+            <p class="section-kicker">Chuẩn bị trước khi liên hệ</p>
+            <h2 id="prep-heading">Thông tin càng rõ, tư vấn càng sát nhu cầu</h2>
+            <p>
+              Khách hàng không cần chuẩn bị đầy đủ mọi thông tin ngay từ đầu. Tuy nhiên, những nội dung dưới đây giúp MayMacCTH hiểu nhanh hơn yêu cầu đặt may và đưa ra phương án phù hợp.
+            </p>
+          </div>
+          <ul class="checklist">
+            <li><strong>Nhóm người mặc</strong>Nhân viên văn phòng, nhà máy, nhà hàng, học sinh hoặc đội nhóm.</li>
+            <li><strong>Loại sản phẩm</strong>Áo polo, áo sơ mi, áo lớp, trang phục dịch vụ hoặc sản phẩm khác.</li>
+            <li><strong>Nhận diện thương hiệu</strong>Màu sắc, logo, vị trí in hoặc thêu và kiểu dáng mong muốn.</li>
+            <li><strong>Số lượng và thời điểm cần hàng</strong>Thông tin để cùng thống nhất phương án báo giá và giao nhận.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="container local" aria-labelledby="local-heading">
+        <div class="local-copy">
+          <p class="section-kicker">Tại Hải Phòng</p>
+          <h2 id="local-heading">Kết nối thuận tiện với khách hàng địa phương</h2>
+          <p>
+            MayMacCTH hướng đến nhu cầu của doanh nghiệp, trường học, nhà hàng, đơn vị dịch vụ và các nhóm khách hàng tại Hải Phòng. Khách hàng tại Ngô Quyền, An Dương, Thủy Nguyên hoặc các khu công nghiệp có thể liên hệ để trao đổi yêu cầu đặt may.
+          </p>
+          <p>
+            Với đơn hàng ngoài Hải Phòng, phương án giao nhận được thống nhất dựa trên thông tin thực tế của từng đơn.
+          </p>
+        </div>
+        <aside class="address-card" aria-label="Thông tin liên hệ MayMacCTH">
+          <h3>Thông tin MayMacCTH</h3>
+          <p>73/202 Miếu Hai Xã, Lê Chân, Hải Phòng</p>
+          <p>Mã số thuế: 0202167805</p>
+          <small>Hotline cần được xác nhận trước khi xuất bản trang chính thức.</small>
+        </aside>
+      </section>
+
+      <section class="container faq" aria-labelledby="faq-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Câu hỏi thường gặp</p>
+          <h2 id="faq-heading">Một số thông tin khách hàng thường trao đổi trước khi đặt may</h2>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>Có thể đặt may theo logo riêng không?</h3>
+            <p>Khách hàng có thể gửi logo, màu sắc và yêu cầu về vị trí thể hiện để trao đổi phương án phù hợp với sản phẩm.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Báo giá được xác định như thế nào?</h3>
+            <p>Báo giá cần dựa trên loại sản phẩm, chất liệu, phương án in hoặc thêu, số lượng và các yêu cầu cụ thể của đơn hàng.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Đơn hàng ngoài Hải Phòng thì sao?</h3>
+            <p>Khách hàng có thể liên hệ để trao đổi địa điểm nhận hàng và phương án giao nhận phù hợp với từng đơn.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container product-gallery" aria-labelledby="gallery-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Một số sản phẩm trên MayMacCTH</p>
+          <h2 id="gallery-heading">Tham khảo hình ảnh trước khi trao đổi yêu cầu đặt may</h2>
+          <p>Hình ảnh dưới đây được lấy từ các trang sản phẩm đang hiển thị trên MayMacCTH.com.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-card">
+            <img src="https://maymaccth.com/storage/hf-20260305-084722-7d45ed21-f667-4879-8ab8-06f0d00d1b00.jpeg" alt="Mẫu áo polo thể thao trên MayMacCTH" />
+            <figcaption>Áo polo thể thao và câu lạc bộ</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="https://maymaccth.com/storage/344370025-778670443586829-1406004084395875084-n.jpg" alt="Mẫu tạp dề in logo trên MayMacCTH" />
+            <figcaption>Tạp dề ngành dịch vụ</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="https://maymaccth.com/storage/c674a6ee3c558d0bd44414.jpg" alt="Mẫu áo thể thao có logo trên MayMacCTH" />
+            <figcaption>Áo đội nhóm theo nhận diện</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="cta" aria-labelledby="cta-heading">
+        <div class="container">
+          <h2 id="cta-heading">Trao đổi nhu cầu may đồng phục cùng MayMacCTH</h2>
+          <p>Liên hệ để cung cấp thông tin về sản phẩm, số lượng dự kiến, yêu cầu logo và thời điểm cần hàng.</p>
+          <a class="button" href="https://maymaccth.com/contact-us">Liên hệ MayMacCTH</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-content">
+        <strong>MayMacCTH</strong>
+        <span>May đồng phục theo yêu cầu tại Hải Phòng</span>
+        <span>© 2026 MayMacCTH</span>
+      </div>
+    </footer>
+  </body>
+</html>

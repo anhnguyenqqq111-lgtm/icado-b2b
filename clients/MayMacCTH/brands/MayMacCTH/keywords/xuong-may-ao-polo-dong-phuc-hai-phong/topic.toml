@@ -1,0 +1,11 @@
+schema_version = 1
+id = "MayMacCTH/MayMacCTH/xuong-may-ao-polo-dong-phuc-hai-phong"
+client = "MayMacCTH"
+brand = "MayMacCTH"
+slug = "xuong-may-ao-polo-dong-phuc-hai-phong"
+workflow = "standard"
+status = "backlog"
+updated_at = "2026-09-08"
+
+[artifacts]
+search_intent = "search-intent.md"

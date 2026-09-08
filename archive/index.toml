@@ -1,0 +1,13 @@
+schema_version = 1
+storage_policy = "external"
+note = "Backup and release binaries live outside the repository. Add URI and SHA-256 entries below when exporting a snapshot."
+
+[[snapshots]]
+name = "everest-logistics-next"
+uri = "backups/everest-logistics-next.zip"
+sha256 = "e5aa937256d97174fbc86822a3ee8b27e4a760d7b171056ad015a6eefe774625"
+
+[[snapshots]]
+name = "everest-logistics-site"
+uri = "backups/everest-logistics-site.zip"
+sha256 = "a6d2a6ce82882249b8c51dc6a0a3e0482dd60901f9ada37caeb231fc54ef533c"
