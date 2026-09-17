@@ -1,3 +1,0 @@
-import Link from 'next/link';import {serviceGroups} from '@/lib/services';
-export const metadata={title:'Danh mục dịch vụ'};
-export default function Services(){return <main><section className="pageHero"><div className="container"><span className="eyebrow">Danh mục dịch vụ</span><h1>Giải pháp logistics theo từng nhu cầu</h1><p>Chọn nghiệp vụ để xem phạm vi hỗ trợ và gửi yêu cầu báo giá.</p></div></section><section className="section"><div className="container serviceGroups">{serviceGroups.map(g=><article className="serviceGroup" key={g.name}><h2>{g.name}</h2>{g.items.map(i=><Link key={i.slug} href={'/dich-vu/'+i.slug}><span>{i.name}</span><b>→</b></Link>)}</article>)}</div></section></main>}
